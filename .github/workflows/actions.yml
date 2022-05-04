@@ -37,10 +37,6 @@ jobs:
         with: 
           name: assets-for-download
           path: testreports
-      - name: Rename reports to index.html
-        run: |
-         cd  testreports
-         mv report.html index.html
       - name: Deploy report to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
