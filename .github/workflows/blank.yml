@@ -27,6 +27,20 @@ jobs:
       - uses: addnab/docker-run-action@v3
         with:
           image: ppsahoo/robot_selenium_tests_in_chrome:latest
-          options: -e ROBOT_UID=1000 -e ROBOT_GID=1000 -v ${{ github.workspace }}/tests:/opt/robotframework/tests:Z
+          options: -e ROBOT_UID=1000 -e ROBOT_GID=1000 -v ${{ github.workspace }}/tests:/opt/robotframework/tests:Z -v ${{ github.workspace }}/reports:/opt/robotframework/reports:Z
           run: |
             runrobottests.sh
+      - name: Upload reports
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: reports
+      - name: Rename reports to index.html
+        run: |
+         cd  reports
+         mv report.html index.html
+      - name: Deploy report to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: Reports # The folder the action should deploy.
