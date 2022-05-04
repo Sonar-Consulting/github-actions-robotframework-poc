@@ -27,7 +27,7 @@ jobs:
       - uses: addnab/docker-run-action@v3
         with:
           image: ppsahoo/robot_selenium_tests_in_chrome:latest
-          options: -e ROBOT_UID=1000 -e ROBOT_GID=1000 -v ${{ github.workspace }}/tests:/opt/robotframework/tests:Z -v ${{ github.workspace }}/testreports:/opt/robotframework/reports:Z
+          options: --user=1001:1001 -v ${{ github.workspace }}/tests:/opt/robotframework/tests:Z -v ${{ github.workspace }}/testreports:/opt/robotframework/reports:Z
           run: |
             runrobottests.sh
       - name: Upload reports
