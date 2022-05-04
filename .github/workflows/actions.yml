@@ -37,8 +37,10 @@ jobs:
         with: 
           name: assets-for-download
           path: testreports
+      - name: Rename reports
+        run: mv report.html index.html  
       - name: Deploy report to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.4
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: testreports # The folder the action should deploy.
