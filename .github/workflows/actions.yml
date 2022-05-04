@@ -23,7 +23,7 @@ jobs:
  # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: checkout and run code
-        uses: actions/checkout@v2 # Required to mount the Github Workspace to a volume
+        uses: actions/checkout@v2.3.4 # Required to mount the Github Workspace to a volume
       - name: Give access to testreports
         run: mkdir ${{ github.workspace }}/testreports && chmod 777 ${{ github.workspace }}/testreports
       - uses: addnab/docker-run-action@v3
