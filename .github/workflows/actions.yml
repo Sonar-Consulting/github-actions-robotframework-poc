@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: checkout and run code
         uses: actions/checkout@v2 # Required to mount the Github Workspace to a volume
+      - name: Give access to testreports
+        run: chmod 777 ${{ github.workspace }}/testreports
       - uses: addnab/docker-run-action@v3
         with:
           image: ppsahoo/robot_selenium_tests_in_chrome:latest
