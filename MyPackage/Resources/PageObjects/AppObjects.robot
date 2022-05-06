@@ -1,5 +1,6 @@
 *** Settings ***
 
+
 *** Variables ***
 ${txt_UserName}  id=txtUsername
 ${txt_Password}   id=txtPassword
@@ -8,7 +9,13 @@ ${btn_Login}    id=btnLogin
 *** Keywords ***
 Log Into Orangehrm
     [Arguments]  ${URL}     ${username}     ${password}
-    Create Webdriver    Chrome   executable_path=/Users/prachuryasahoo/Downloads/chromedriver
+    ${chrome options}=    Evaluate     sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+                          Call Method    ${chrome options}   add_argument    headless
+                          Call Method    ${chrome options}   add_argument    disable-gpu
+                          Call Method    ${chrome options}   add_argument    disable-dev-shm-usage
+                          Call Method    ${chrome options}   add_argument    no-sandbox
+
+    Create Webdriver    Chrome    chrome_options=${chrome options}
     Go to  ${URL}
     Set Browser Implicit Wait    5
     Input Text    ${txt_UserName}   ${username}

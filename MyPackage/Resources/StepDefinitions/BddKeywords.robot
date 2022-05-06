@@ -1,5 +1,5 @@
 *** Settings ***
-Resource        MyPackage/Resources/PageObjects/AppObjects.robot
+Resource        .././PageObjects/AppObjects.robot
 *** Variables ***
 ${BROWSER}             Chrome
 ${URL}                 https://opensource-demo.orangehrmlive.com/

@@ -1,6 +1,7 @@
 *** Settings ***
-Resource        MyPackage/Resources/StepDefinitions/BddKeywords.robot
-Resource        CommonResources/BaseTest.robot
+Resource  ../.././Resources/StepDefinitions/BddKeywords.robot
+Resource  ../.././Common/LibraryImport.robot
+
 
 *** Variables ***
 ${BROWSER}             Chrome
