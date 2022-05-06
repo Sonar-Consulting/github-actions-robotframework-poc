@@ -1,6 +1,6 @@
 *** Settings ***
-Resource  ../.././Resources/StepDefinitions/BddKeywords.robot
-Resource  ../.././Common/LibraryImport.robot
+Resource  ../.././resources/stepDefinitions/bddKeywords.robot
+Resource  ../.././common/libraryImport.robot
 
 
 *** Variables ***

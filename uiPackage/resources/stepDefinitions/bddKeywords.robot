@@ -1,5 +1,5 @@
 *** Settings ***
-Resource        .././PageObjects/AppObjects.robot
+Resource        .././pageObjects/appObjects.robot
 *** Variables ***
 ${BROWSER}             Chrome
 ${URL}                 https://opensource-demo.orangehrmlive.com/
