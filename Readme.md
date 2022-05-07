@@ -41,7 +41,7 @@ This project is a POC on testing robot UI and API tests using GitHub actions.
     
         
 # Note:
- actions.yml file i.e. the file used to create workflow for GitHub actions is created in .github/Workflows folder.
+ actions.yml file i.e. the file used to generate workflow for GitHub actions is created in .github/Workflows folder.
  
  
    
