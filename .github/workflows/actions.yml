@@ -43,10 +43,8 @@ jobs:
           ref: feature/testreports
        - name: Retrieve reports
          needs: Upload reports
-      steps:
-      - name: Download reports
-        uses: actions/download-artifact@v3
-        with:
+         uses: actions/download-artifact@v3
+         with:
               name: assets-for-download
               run: |
                 cp assets-for-download  reports
