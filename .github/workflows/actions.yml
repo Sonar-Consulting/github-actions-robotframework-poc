@@ -12,7 +12,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  job_1:
+  job1:
     runs-on: ubuntu-latest
     name: Run Robot tests
  # Steps represent a sequence of tasks that will be executed as part of the job
@@ -32,10 +32,10 @@ jobs:
         with:
           name: assets-for-download
           path: testreports
-  job_2:
-      runs-on: ubuntu-latest
-      name: Run Robot tests
-      needs: job_1
+  job2:
+    runs-on: ubuntu-latest
+    name: Retrieve reports
+    needs: job1
     steps:
       - name: Checkout feature/testreports
         uses: actions/checkout@v3
