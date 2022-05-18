@@ -46,7 +46,7 @@ jobs:
         with:
               name: assets-for-download
               run: |
-                cp assets-for-download  reports
+                cp assets-for-download  testreports
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
