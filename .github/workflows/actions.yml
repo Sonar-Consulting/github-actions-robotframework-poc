@@ -35,7 +35,7 @@ jobs:
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - uses: actions/checkout@v3
-      - name: Copy
+      - name: Checkout gh-pages
         env:
           SRC_FOLDER_PATH: 'reports'
           TARGET_BRANCH: 'gh-pages'
@@ -48,12 +48,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: assets-for-download
-          path: ${{ github.workspace }}/testreports
-      - name: copy file
-        uses: canastro/copy-file-action@master
-        with:
-          source: "testreports/report.html"
-          target: "reports/${{ env.NOW }}"
+          path: reports/${{ env.NOW }}/
       - name: Add the downloaded file
         run: |
           git add .
