@@ -11,9 +11,8 @@ on:
     - 'feature/**'
   pull_request:
     branches: [ master ]
-
 jobs:
-  job_1:
+  job1:
     runs-on: ubuntu-latest
     name: Run Robot tests
  # Steps represent a sequence of tasks that will be executed as part of the job
@@ -33,21 +32,26 @@ jobs:
         with:
           name: assets-for-download
           path: testreports
-  job_2:
-      runs-on: ubuntu-latest
-      name: Run Robot tests
-      needs: job_1
+  job2:
+    runs-on: ubuntu-latest
+    name: Retrieve reports
+    needs: job1
     steps:
-      - name: Checkout feature/testreports
-        uses: actions/checkout@v3
-        with:
-            ref: feature/testreports
-      - name: Download reports
-        uses: actions/download-artifact@v3
-        with:
-              name: assets-for-download
-              run: |
-                cp assets-for-download  reports
+      - uses: actions/checkout@v3
+      - name: Copy
+        env:
+          SRC_FOLDER_PATH: 'reports'
+          TARGET_BRANCH: 'feature/testreports'
+        run: |
+          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch                         # fetch branches
+          git checkout $TARGET_BRANCH       # checkout to your branch
+          git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
+          git push origin $TARGET_BRANCH # push to remote branch
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
