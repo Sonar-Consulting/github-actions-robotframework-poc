@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: POC Github actions
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+    - master
+    - 'feature/**'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    name: Run Robot tests
+ # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: checkout and run code
+        uses: actions/checkout@v2.3.4 # Required to mount the Github Workspace to a volume
+      - name: Give access to testreports
+        run: mkdir ${{ github.workspace }}/testreports && chmod 777 ${{ github.workspace }}/testreports
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: ppsahoo/robot_selenium_tests_in_chrome:latest
+          options: -v ${{ github.workspace }}:/opt/robotframework/tests:Z -v ${{ github.workspace }}/testreports:/opt/robotframework/reports:Z
+          run: |
+            runrobottests.sh
+      - name: Upload reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-download
+          path: testreports
+  job_2:
+      runs-on: ubuntu-latest
+      name: Run Robot tests
+      needs: job_1
+    steps:
+      - name: Checkout feature/testreports
+        uses: actions/checkout@v3
+        with:
+            ref: feature/testreports
+      - name: Download reports
+        uses: actions/download-artifact@v3
+        with:
+              name: assets-for-download
+              run: |
+                cp assets-for-download  reports
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
+      - name: Rename reports
+        run: |
+         mkdir Reports
+         mv testreports Reports/${{ env.NOW }}
+         cd Reports/${{ env.NOW }}
+         mv report.html index.html
+      - name: Deploy report to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+                branch: gh-pages # The branch the action should deploy to.
+                folder: Reports # The folder the action should deploy.
