@@ -44,9 +44,13 @@ jobs:
       - name: Download reports
         uses: actions/download-artifact@v3
         with:
-              name: assets-for-download
-              run: |
-                cp assets-for-download  testreports
+              name: testreportscopy
+              path: testreports
+      - name: Copy file
+        uses: canastro/copy-file-action@master
+        with:
+             source: testreports
+             target: reports         
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
