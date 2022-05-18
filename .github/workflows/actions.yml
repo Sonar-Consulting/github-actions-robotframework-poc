@@ -44,6 +44,7 @@ jobs:
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
+          mkdir -p reports
       - uses: actions/download-artifact@v2
         with:
           name: assets-for-download
