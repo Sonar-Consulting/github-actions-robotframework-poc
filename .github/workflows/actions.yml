@@ -44,7 +44,6 @@ jobs:
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
-          mkdir reports
       - uses: actions/download-artifact@v2
         with:
           name: assets-for-download
@@ -59,16 +58,3 @@ jobs:
           git add .
           git commit -m "Adding the files"
           git push origin $TARGET_BRANCH # push to remote branch
-      - name: Set current date as env variable
-        run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
-      - name: Rename reports
-        run: |
-         mkdir Reports
-         mv testreports Reports/${{ env.NOW }}
-         cd Reports/${{ env.NOW }}
-         mv report.html index.html
-      - name: Deploy report to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-                branch: gh-pages # The branch the action should deploy to.
-                folder: Reports # The folder the action should deploy.
