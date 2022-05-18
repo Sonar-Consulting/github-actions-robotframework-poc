@@ -37,6 +37,10 @@ jobs:
         with: 
           name: assets-for-download
           path: testreports
+      - name: Checkout feature/testreports
+        uses: actions/checkout@v3
+        with:
+          ref: feature/testreports
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
