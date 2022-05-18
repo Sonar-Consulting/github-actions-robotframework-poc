@@ -44,6 +44,7 @@ jobs:
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
+          mkdir reports
       - uses: actions/download-artifact@v2
         with:
           name: assets-for-download
@@ -52,7 +53,7 @@ jobs:
         uses: canastro/copy-file-action@master
         with:
           source: "testreports/report.html"
-          target: "reports/report/${{ env.NOW }}"
+          target: "reports/${{ env.NOW }}"
       - name: Add the downloaded file
         run: |
           git commit -am "added new reports"
