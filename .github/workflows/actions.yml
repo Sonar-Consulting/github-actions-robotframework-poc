@@ -48,9 +48,9 @@ jobs:
         with:
           name: assets-for-download
           run: |
-          mv assets-for-download reports/report/${{ env.NOW }}
-          git commit -am "added new reports"
-          git push origin $TARGET_BRANCH # push to remote branch
+            mv assets-for-download reports/report/${{ env.NOW }}
+            git commit -am "added new reports"
+            git push origin $TARGET_BRANCH # push to remote branch
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
