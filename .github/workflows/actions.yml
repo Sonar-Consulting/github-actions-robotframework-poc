@@ -42,7 +42,7 @@ jobs:
       - name: Rename reports
         run: |
          mv testreports testreports+${{ env.NOW }}
-         cd testreports
+         cd testreports+${{ env.NOW }}
          mv report.html index.html
       - name: Deploy report to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
