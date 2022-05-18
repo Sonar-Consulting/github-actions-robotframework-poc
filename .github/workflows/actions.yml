@@ -11,7 +11,7 @@ on:
     - 'feature/**'
   pull_request:
     branches: [ master ]
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
   job_1:
     runs-on: ubuntu-latest
@@ -52,13 +52,12 @@ jobs:
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
       - name: Rename reports
         run: |
-        mkdir Reports
-        mv testreports Reports/${{ env.NOW }}
-        cd Reports/${{ env.NOW }}
-        mv report.html index.html
+         mkdir Reports
+         mv testreports Reports/${{ env.NOW }}
+         cd Reports/${{ env.NOW }}
+         mv report.html index.html
       - name: Deploy report to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
                 branch: gh-pages # The branch the action should deploy to.
                 folder: Reports # The folder the action should deploy.
-
