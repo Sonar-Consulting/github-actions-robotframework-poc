@@ -37,12 +37,15 @@ jobs:
         with: 
           name: assets-for-download
           path: testreports
+      - name: Set current date as env variable
+          run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: Rename reports
         run: |
+         mv testreports testreports+ $NOW 
          cd testreports
-         mv report.html index.html  
+         mv report.html index.html
       - name: Deploy report to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: testreports # The folder the action should deploy.
+          folder: testreports+ $NOW # The folder the action should deploy.
