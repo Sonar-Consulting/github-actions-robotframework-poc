@@ -44,7 +44,7 @@ jobs:
       - name: Download reports
         uses: actions/download-artifact@v3
         with:
-              name: testreportscopy
+              name: assets-for-download
               path: testreports
       - name: Copy file
         uses: canastro/copy-file-action@master
