@@ -56,7 +56,8 @@ jobs:
           target: "reports/${{ env.NOW }}"
       - name: Add the downloaded file
         run: |
-          git commit -am "added new reports"
+          git add .
+          git commit -m "Adding the files"
           git push origin $TARGET_BRANCH # push to remote branch
       - name: Set current date as env variable
         run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
