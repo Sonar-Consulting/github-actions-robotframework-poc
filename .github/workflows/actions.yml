@@ -41,11 +41,12 @@ jobs:
         run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: Rename reports
         run: |
-         mv testreports testreports+${{ env.NOW }}
-         cd testreports+${{ env.NOW }}
+         mkdir fullreports 
+         mv testreports fullreports/testreports+${{ env.NOW }}
+         cd fullreports/testreports+${{ env.NOW }}
          mv report.html index.html
       - name: Deploy report to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: testreports+${{ env.NOW }} # The folder the action should deploy.
+          folder: fullreports # The folder the action should deploy.
