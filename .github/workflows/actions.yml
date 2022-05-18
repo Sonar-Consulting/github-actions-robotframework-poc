@@ -49,7 +49,7 @@ jobs:
           name: assets-for-download
       - name: Add the downloaded file
         run: |
-          mv assets-for-download reports/report/${{ env.NOW }}
+          mv /home/runner/work/demo-robottests-github-actions/demo-robottests-github-actions/assets-for-download reports/report/${{ env.NOW }}
           git commit -am "added new reports"
           git push origin $TARGET_BRANCH # push to remote branch
       - name: Set current date as env variable
