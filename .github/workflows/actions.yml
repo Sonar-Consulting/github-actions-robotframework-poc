@@ -48,9 +48,13 @@ jobs:
         with:
           name: assets-for-download
           path: ${{ github.workspace }}/testreports
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "testreports/report.html"
+          target: "reports/report/${{ env.NOW }}"
       - name: Add the downloaded file
         run: |
-          mv "testreports" reports/report/${{ env.NOW }}
           git commit -am "added new reports"
           git push origin $TARGET_BRANCH # push to remote branch
       - name: Set current date as env variable
