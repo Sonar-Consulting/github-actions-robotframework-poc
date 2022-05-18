@@ -49,7 +49,7 @@ jobs:
         with:
           name: assets-for-download
           path: reports/${{ env.NOW }}/
-      - name: Add the downloaded file
+      - name: Add the downloaded file to gh-pages
         run: |
           git add .
           git commit -m "Adding the files"
