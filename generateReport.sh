@@ -1,5 +1,6 @@
 #!/bin/bash
-arr=(reports/*/) 
+cd reports
+arr=(*/) 
 arr=("${arr[@]%/}")       
 length="${#arr[@]}"
 finalReport="${arr[length-1]}";
@@ -20,7 +21,7 @@ html='
       <div class=uk-container uk-card-body>
          <p>
          <h3 class=uk-text-center> Latest execution report :
-            <a class=uk-link href="'$finalReport'/report.html" />'$finalReport' </a>
+            <a class=uk-link href="reports/'$finalReport'/report.html" />'$finalReport' </a>
          </h3>
          </p>
       </div>
@@ -33,6 +34,7 @@ html='
 endhtml='</tbody></table></div></body></html>'
 innerHtml='';
 for d in "${arr[@]}";do
-      innerHtml+='<tr><td><a class=uk-link href="'$d'/report.html"><h4>'$d'</h4> </a></td></tr>'
+      innerHtml+='<tr><td><h4><a class=uk-link href="reports/'$d'/report.html">'$d'</a></h4></td></tr>'
 done;
+cd ..
 echo $html$innerHtml$endhtml > index.html
