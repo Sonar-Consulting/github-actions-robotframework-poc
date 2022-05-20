@@ -6,18 +6,13 @@ name: POC Github actions
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: 
-    - master 
+    branches:
+    - master
     - 'feature/**'
   pull_request:
     branches: [ master ]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-
+  job1:
     runs-on: ubuntu-latest
     name: Run Robot tests
  # Steps represent a sequence of tasks that will be executed as part of the job
@@ -34,15 +29,30 @@ jobs:
             runrobottests.sh
       - name: Upload reports
         uses: actions/upload-artifact@v2
-        with: 
-          name: assets-for-download
-          path: testreports
-      - name: Rename reports
-        run: |
-         cd testreports
-         mv report.html index.html  
-      - name: Deploy report to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: testreports # The folder the action should deploy.
+          name: assets-for-download
+          path: ${{ github.workspace }}/testreports
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +%Y-%m-%dT%H:%M:%S)" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - name: Checkout gh-pages
+        env:
+          SRC_FOLDER_PATH: 'reports'
+          TARGET_BRANCH: 'gh-pages'
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch                         # fetch branches
+          git checkout $TARGET_BRANCH       # checkout to your branch
+          mkdir -p reports
+      - uses: actions/download-artifact@v2
+        with:
+          name: assets-for-download
+          path: reports/${{ env.NOW }}/
+      - name: Add the downloaded file to gh-pages
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}/generateReport.sh"
+          "${GITHUB_WORKSPACE}/generateReport.sh"
+          git add .
+          git commit -m "Adding the files"
+          git push origin $TARGET_BRANCH # push to remote branch
