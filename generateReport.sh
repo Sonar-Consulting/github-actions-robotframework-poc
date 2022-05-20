@@ -1,10 +1,15 @@
 #!/bin/bash
 cd reports
-arr=(*/) 
-arr=("${arr[@]%/}")       
-length="${#arr[@]}"
-finalReport="${arr[length-1]}";
-html='
+
+listOfReports=(*/) 
+
+listOfReports=("${arr[@]%/}")   
+
+length="${#listOfReports[@]}"
+
+finalReport="${listOfReports[length-1]}";
+
+start_html='
 <!doctype html> 
 <html>
    <head>
@@ -31,10 +36,13 @@ html='
       <table class="uk-table uk-table-striped">
       <tbody>'
       
-endhtml='</tbody></table></div></body></html>'
-innerHtml='';
-for d in "${arr[@]}";do
+end_html='</tbody></table></div></body></html>';
+
+inner_html='';
+
+for d in "${listOfReports[@]}";do
       innerHtml+='<tr><td><h4><a class=uk-link href="reports/'$d'/report.html">'$d'</a></h4></td></tr>'
 done;
+
 cd ..
-echo $html$innerHtml$endhtml > index.html
+echo $start_html$inner_html$end_html > index.html
