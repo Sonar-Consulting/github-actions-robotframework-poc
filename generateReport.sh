@@ -20,7 +20,7 @@ html='
       <div class=uk-container uk-card-body>
          <p>
          <h3 class=uk-text-center> Latest execution report :
-            <a class=uk-link href="'$finalReport'/index.html" />'$finalReport' </a>
+            <a class=uk-link href="'$finalReport'/report.html" />'$finalReport' </a>
          </h3>
          </p>
       </div>
@@ -33,6 +33,6 @@ html='
 endhtml='</tbody></table></div></body></html>'
 innerHtml='';
 for d in "${arr[@]}";do
-      innerHtml+='<tr><td><a class=uk-link href="'$d'/index.html"><h4>'$d'</h4> </a></td></tr>'
+      innerHtml+='<tr><td><a class=uk-link href="'$d'/report.html"><h4>'$d'</h4> </a></td></tr>'
 done;
 echo $html$innerHtml$endhtml > index.html
