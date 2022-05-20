@@ -1,5 +1,5 @@
 #!/bin/bash
-arr=(*/) 
+arr=(reports/*/) 
 arr=("${arr[@]%/}")       
 length="${#arr[@]}"
 finalReport="${arr[length-1]}";
