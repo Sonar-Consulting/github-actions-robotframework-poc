@@ -51,7 +51,8 @@ jobs:
           path: reports/${{ env.NOW }}/
       - name: Add the downloaded file to gh-pages
         run: |
-          sh generateReport.sh
+          chmod +x "${GITHUB_WORKSPACE}/generateReport.sh"
+          "${GITHUB_WORKSPACE}/generateReport.sh"
           git add .
           git commit -m "Adding the files"
           git push origin $TARGET_BRANCH # push to remote branch
