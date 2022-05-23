@@ -34,22 +34,26 @@ This project is a POC on testing robot UI and API tests using GitHub actions.
  
         docker run -v $(pwd):/opt/robotframework/tests -v $(pwd)/reports:/opt/robotframework/reports --platform linux/amd64 ppsahoo/robot_selenium_tests_in_chrome
         
+        
  # To run tests via Github actions:
  
  1. Any changes (Ex: push/pull request) in the project will trigger github actions.
  2. To publish report : Upgrade Github or make the repository 'public'
+ 
 
-# To generate and view report(s) - current and historical in gh-pages
+# To generate and view report(s) - current and historical in gh-pages:
 
 Before execution:
 
  1. Ensure generateReport.sh file is available in gh-pages repository
- 2. Navigate to Settings > Pages of your repository, in the 'Source' section select - Branch : gh-pages and Folder : /root
+ 2. In your project repository navigate to Settings > Pages, in the section named 'Source' select - Branch : gh-pages and Folder : /root
 
 After execution:
 
  3. To view the published report(s), navigate to Settings > pages > Github pages link - copy the link to your browser and press enter.
-    (Note: Hit refresh button as it takes a few secs to load the latest report(s))    
+    (Note: Hit refresh button as it takes a few secs to load the latest report(s))  
+    
+    Alternatively, you can retrieve the published report link from the step 'deploy' of workflow once 'pages build and deployment' pipeline is complete.
         
 # Note:
  actions.yml file i.e. the file used to generate workflow for GitHub actions is created in .github/Workflows folder.
