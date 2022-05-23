@@ -38,7 +38,16 @@ This project is a POC on testing robot UI and API tests using GitHub actions.
  
  1. Any changes (Ex: push/pull request) in the project will trigger github actions.
  2. To publish report : Upgrade Github or make the repository 'public'
-    
+
+# To generate and view report(s) - current and historical in gh-pages
+
+Before execution:
+ 1. Ensure generateReport.sh file is available in gh-pages repository
+ 2. Navigate to Settings > Pages of your repository, in the 'Source' section select - Branch : gh-pages and Folder : /root
+
+After execution:
+ 4. To view the published report(s), navigate to Settings > pages > Github pages link - copy the link to your browser and press enter.
+    (Note: Hit refresh button as it takes a few secs to load the latest report(s))    
         
 # Note:
  actions.yml file i.e. the file used to generate workflow for GitHub actions is created in .github/Workflows folder.
