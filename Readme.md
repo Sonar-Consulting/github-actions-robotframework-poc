@@ -1,5 +1,5 @@
 # Project title:
-Robot framework testing using GitHub actions
+Robot framework testing using GitHub actions.
 
 # Description :
 This project is a POC on testing robot UI and API tests using GitHub actions.
